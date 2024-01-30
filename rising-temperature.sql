@@ -45,3 +45,8 @@ Explanation:
 In 2015-01-02, the temperature was higher than the previous day (10 -> 25).
 In 2015-01-04, the temperature was higher than the previous day (20 -> 30).
 */
+
+--Solution 1:
+SELECT w1.id
+FROM Weather w1 cross join Weather w2
+where datediff(w1.recordDate, w2.recordDate) = 1 and w1.temperature > w2.temperature 

@@ -44,3 +44,10 @@ Output:
 | John |
 +------+
 */
+
+--Solution 1:
+Select e1.name
+from Employees e1
+join Employees e2 on e1.id = e2.managerId
+GROUP BY e1.id, e1.name
+having count(e2.managerId) >= 5

@@ -51,3 +51,16 @@ from Employees e1
 join Employees e2 on e1.id = e2.managerId
 GROUP BY e1.id, e1.name
 having count(e2.managerId) >= 5
+
+--Solution 2:
+SELECT
+    Name
+FROM
+    Employees 
+WHERE ID in
+    (SELECT
+        ManagerId
+    FROM
+        Employees
+    GROUP BY ManagerId
+    HAVING COUNT(ManagerId) >= 5) 

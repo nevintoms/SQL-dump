@@ -77,3 +77,14 @@ Alice and Alex registered in contest 215 and the percentage is ((2/3) * 100) = 6
 Bob registered in contest 207 and the percentage is ((1/3) * 100) = 33.33%
 */
 
+--Solution:
+SELECT
+    Register.contest_id,
+    ROUND((COUNT(Register.user_id) / (SELECT COUNT(DISTINCT user_id) FROM Users)) * 100, 2) as percentage #dont have to join just because there are two tables. For this type of question, use one table
+FROM
+    Register    
+GROUP BY
+    Register.contest_id
+ORDER BY
+    percentage DESC,
+    Register.contest_id ASC

@@ -61,3 +61,11 @@ where (customer_id, order_date) in (
     from Delivery
     group by customer_id
 )
+
+--Solution 2:
+select round(sum(if(customer_pref_delivery_date=first_date,1,0))/count(1)*100,2) as immediate_percentage
+from 
+(select customer_id, min(order_date) as first_date
+from delivery
+group by customer_id) as t1 join delivery as t2 on 
+t1.customer_id=t2.customer_id and first_date=order_date

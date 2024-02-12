@@ -52,3 +52,12 @@ The customer id 3 has a first order with delivery id 5 and it is scheduled.
 The customer id 4 has a first order with delivery id 7 and it is immediate.
 Hence, half the customers have immediate first orders.
 */
+
+--Solution 1:
+select round(avg(order_date=customer_pref_delivery_date)*100,2) as immediate_percentage
+from Delivery
+where (customer_id, order_date) in (
+    select customer_id, min(order_date)
+    from Delivery
+    group by customer_id
+)
